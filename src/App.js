@@ -73,7 +73,7 @@ this.setState(() =>{ //Pass in a functoion. And then return something!
       className='Search-box' 
       type='Search' 
       placeholder='Search Names'
-      onChange = {handleSearchChange} />
+      onChange = {handleSearchChange} /> Umoren
 
      {/* filteredMonsters.map((monster) => {
             return (
@@ -83,6 +83,7 @@ this.setState(() =>{ //Pass in a functoion. And then return something!
       <CardList/>
       
       </div>
+    
     
     );
   }
