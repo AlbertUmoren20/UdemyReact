@@ -14,42 +14,26 @@ class App extends Component {
     this.state = { 
       //Now we create monsters, 
       // having object that contains names as a string
-     monsters : [
-       {
-        name: "Linda",
-        id: "12467"
-       },
-       
-        {
-        name: "Frank",
-        id: "1567"
-       },
-      {
-        name: "Testi-Money",
-        id: "12"
-       }
-     ],
-     searchField: ""
+     monsters : [],
+     searchField: "",
      
     };
-    console.log("constructor");
+
   }
 
-  // componentDidMount(){
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //   .then(response => response.json()) // In a Json format
-  //   // .then(users => console.log(users)); // where by it is stored in "users".
-  //   // Only reason why a function was mentioned, so that a call back can also be mentioned!
-  //   .then(users => this.setState(() => {
-  //     return{ monsters: users};
-  //   },
-  //   () => {
-  //     console.log(this.state)
-  //   }
-  //   ))
-  // }
+  componentDidMount(){
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => response.json()) // In a Json format
+    // .then(users => console.log(users)); // where by it is stored in "users".
+    // Only reason why a function was mentioned, so that a call back can also be mentioned!
+    .then(users => this.setState(() => {
+      return{ monsters: users};
+    },
+    
+    ))
+  }
 
-  handleSearchChange = (event) => {
+  onSearchChange = (event) => {
 console.log(event.target.value); // A search string
 //gives us the string that's typed into that search box in the console
 const searchField = event.target.value.toLocaleLowerCase();
@@ -61,8 +45,9 @@ this.setState(() =>{ //Pass in a functoion. And then return something!
 
 
   render(){
+
     const {monsters, searchField} = this.state;
-    const {handleSearchChange} = this;
+    const {onSearchChange} = this;
     const filteredMonsters = monsters.filter((monster) =>{
       return monster.name.toLocaleLowerCase().includes(searchField);
     });
@@ -73,14 +58,14 @@ this.setState(() =>{ //Pass in a functoion. And then return something!
       className='Search-box' 
       type='Search' 
       placeholder='Search Names'
-      onChange = {handleSearchChange} /> Umoren
+      onChange = {onSearchChange} /> 
 
      {/* filteredMonsters.map((monster) => {
             return (
               <div key={monster.id}><h1>{monster.name}</h1></div> )
         })
       */ }
-      <CardList/>
+      <CardList monsters = {filteredMonsters} />
       
       </div>
     
